@@ -39,8 +39,28 @@ class AddEntryForm extends Component {
 
 	render() {
 		const onAddButtonClick = this.props.onAddButtonClick
+		let projectCodes = ["Hiway", "Idera", "Next-IT", "Frrole", "MOM", "TrackMe"]
+		let activityTypes = ["Dev", "Meeting", "E-mail", "Testing", "Debug", "Learning"]
 		return (
 		<div className="add-entry-form col-md-offset-3">
+			<div className="col-md-2">
+				<select className="form-control">
+				<option value="" disabled selected>Select Project Code</option>
+				{projectCodes.map((code,index) => 
+						<option key={index} value={code}>{code}</option>
+					)
+				}
+				</select>		
+			</div>
+			<div className="col-md-2">
+				<select  className="form-control">
+				<option value="" disabled selected>Select Activity</option>
+				{activityTypes.map((activity,index) => 
+						<option key={index} value={activity}>{activity}</option>
+					)
+				}
+				</select>		
+			</div>
 			<div className="col-md-2">
 				<input className="btn" type="button" onClick={onAddButtonClick} value="ADD"/>
 			</div>
@@ -54,7 +74,30 @@ class Entries extends Component {
 	render() {
 		return (
 		<div>
-		{this.props.sampleProp}
+			<table className="table">
+			  <thead>
+			    <tr>
+			      <th>#</th>
+			      <th>Project Code</th>
+			      <th>Activity</th>
+			      <th>Hours</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <th>1</th>
+			      <td>Hiway</td>
+			      <td>Dev</td>
+			      <td>2</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">2</th>
+			      <td>MOM</td>
+			      <td>Debug</td>
+			      <td>1</td>
+			    </tr>
+			  </tbody>
+			</table>
 		</div>
 			)
 	}
