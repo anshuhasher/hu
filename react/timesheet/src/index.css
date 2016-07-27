@@ -3,6 +3,15 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
 .add-entry-form {
+	margin-top: 5%;
+}
+
+.timesheet-table {
+	margin-top: 5%;
+}
+
+.reports {
 	margin-top: 5%;
 }
