@@ -8,19 +8,34 @@ class Timesheet extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			/*Initialize your state here*/
+			entries: []
 		}
 	}
 	
 	/*	-ES6 way of writing a function 
 			-This function is passed as a prop to the AddEntryForm component
 	*/
-	handleAddButtonclick = () => {console.log("This is called from Timesheet Component")}
+	handleAddButtonclick = (e) => {
+		e.preventDefault()
+		this.setState({
+			entries: [
+				...this.state.entries, 
+				{
+					projectCode: $('#project-code').val(),
+					activity: $('#activity').val(),
+					hours: $('#hours').val()
+				}]
+		})		
+	}
   
   render() {
   	/* -Use className instead of class attributes
 			 -React custom components begin with a capital letter like <AddEntryForm>
   	*/
+<<<<<<< HEAD
+=======
+  	const { entries } = this.state
+>>>>>>> upstream/goal-2
   	const projectChartData = [{ name: 'Hiway', y: 5}, {name: 'Idera', y: 6}, {name: 'Next-IT',y: 2 }]
   	const activityChartData = [{ name: 'Dev', y: 2}, {name: 'Meeting', y: 5}, {name: 'Debug',y: 2 }]
     return (
@@ -29,7 +44,7 @@ class Timesheet extends Component {
 	      	<AddEntryForm onAddButtonClick={this.handleAddButtonclick} />
 	      </div>
 	      <div className="col-md-8 col-md-offset-2">
-	      	<Entries sampleProp="This is a sample prop"/>
+	      	<Entries entries={entries}/>
 	      </div>
 	      <div className="col-md-10 col-md-offset-1">
 	      	<Reports chartData={activityChartData} title="By Activity"/>
@@ -48,13 +63,17 @@ class AddEntryForm extends Component {
   }
 
 	render() {
-		const onAddButtonClick = this.props.onAddButtonClick
+		const { onAddButtonClick } = this.props
 		let projectCodes = ["Hiway", "Idera", "Next-IT", "Frrole", "MOM", "TrackMe"]
 		let activityTypes = ["Dev", "Meeting", "E-mail", "Testing", "Debug", "Learning"]
 		return (
 		<div className="add-entry-form col-md-offset-2">
+<<<<<<< HEAD
+=======
+		<form onSubmit={(e) => onAddButtonClick(e)}>
+>>>>>>> upstream/goal-2
 			<div className="col-md-3">
-				<select className="form-control">
+				<select required id="project-code" className="form-control">
 				<option value="" disabled selected>Select Project Code</option>
 				{projectCodes.map((code,index) => 
 						<option key={index} value={code}>{code}</option>
@@ -63,20 +82,28 @@ class AddEntryForm extends Component {
 				</select>		
 			</div>
 			<div className="col-md-3">
-				<select  className="form-control">
-				<option value="" disabled selected>Select Activity</option>
-				{activityTypes.map((activity,index) => 
-						<option key={index} value={activity}>{activity}</option>
-					)
-				}
+				<select required id="activity" className="form-control">
+					<option value="" disabled selected>Select Activity</option>
+					{activityTypes.map((activity,index) => 
+							<option key={index} value={activity}>{activity}</option>
+						)
+					}
 				</select>		
 			</div>
 			<div className="col-md-3">
+<<<<<<< HEAD
 				<input className="form-control" type="number" placeholder="Hours"/>
 			</div>
 			<div className="col-md-3">
 				<input className="btn" type="button" onClick={onAddButtonClick} value="ADD"/>
+=======
+				<input required id="hours" className="form-control" type="number" placeholder="Hours"/>
 			</div>
+			<div className="col-md-3">
+				<input required className="btn" type="submit" value="ADD"/>
+>>>>>>> upstream/goal-2
+			</div>
+		</form>
 		</div>
 			)
 	}
@@ -85,6 +112,9 @@ class AddEntryForm extends Component {
 
 class Entries extends Component {
 	render() {
+
+		const { entries } = this.props
+
 		return (
 		<div className="timesheet-table">
 			<table className="table">
@@ -97,18 +127,14 @@ class Entries extends Component {
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr>
-			      <th>1</th>
-			      <td>Hiway</td>
-			      <td>Dev</td>
-			      <td>2</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">2</th>
-			      <td>MOM</td>
-			      <td>Debug</td>
-			      <td>1</td>
-			    </tr>
+			  	{entries.map((entry, index) => 
+			  		<tr key={index}>
+				      <th>{index+1}</th>
+				      <td>{entry.projectCode}</td>
+				      <td>{entry.activity}</td>
+				      <td>{entry.hours}</td>
+				    </tr>
+			  	)}
 			  </tbody>
 			</table>
 		</div>
