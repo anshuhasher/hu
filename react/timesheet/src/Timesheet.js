@@ -32,10 +32,7 @@ class Timesheet extends Component {
   	/* -Use className instead of class attributes
 			 -React custom components begin with a capital letter like <AddEntryForm>
   	*/
-<<<<<<< HEAD
-=======
   	const { entries } = this.state
->>>>>>> upstream/goal-2
   	const projectChartData = [{ name: 'Hiway', y: 5}, {name: 'Idera', y: 6}, {name: 'Next-IT',y: 2 }]
   	const activityChartData = [{ name: 'Dev', y: 2}, {name: 'Meeting', y: 5}, {name: 'Debug',y: 2 }]
     return (
@@ -68,10 +65,7 @@ class AddEntryForm extends Component {
 		let activityTypes = ["Dev", "Meeting", "E-mail", "Testing", "Debug", "Learning"]
 		return (
 		<div className="add-entry-form col-md-offset-2">
-<<<<<<< HEAD
-=======
 		<form onSubmit={(e) => onAddButtonClick(e)}>
->>>>>>> upstream/goal-2
 			<div className="col-md-3">
 				<select required id="project-code" className="form-control">
 				<option value="" disabled selected>Select Project Code</option>
@@ -91,17 +85,10 @@ class AddEntryForm extends Component {
 				</select>		
 			</div>
 			<div className="col-md-3">
-<<<<<<< HEAD
-				<input className="form-control" type="number" placeholder="Hours"/>
-			</div>
-			<div className="col-md-3">
-				<input className="btn" type="button" onClick={onAddButtonClick} value="ADD"/>
-=======
 				<input required id="hours" className="form-control" type="number" placeholder="Hours"/>
 			</div>
 			<div className="col-md-3">
 				<input required className="btn" type="submit" value="ADD"/>
->>>>>>> upstream/goal-2
 			</div>
 		</form>
 		</div>
