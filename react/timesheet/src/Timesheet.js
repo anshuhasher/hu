@@ -52,7 +52,7 @@ class AddEntryForm extends Component {
 		let projectCodes = ["Hiway", "Idera", "Next-IT", "Frrole", "MOM", "TrackMe"]
 		let activityTypes = ["Dev", "Meeting", "E-mail", "Testing", "Debug", "Learning"]
 		return (
-		<div className="add-entry-form col-md-offset-3">
+		<div className="add-entry-form col-md-offset-2">
 			<div className="col-md-3">
 				<select className="form-control">
 				<option value="" disabled selected>Select Project Code</option>
@@ -70,6 +70,9 @@ class AddEntryForm extends Component {
 					)
 				}
 				</select>		
+			</div>
+			<div className="col-md-3">
+				<input className="form-control" type="number" placeholder="Hours"/>
 			</div>
 			<div className="col-md-3">
 				<input className="btn" type="button" onClick={onAddButtonClick} value="ADD"/>
