@@ -81,6 +81,19 @@ class Reports extends Component {
                 name: 'Next-IT',
                 y: 2
             }]
+    let temp = {};
+        chartData.map((data, index) => {
+            if(!temp[data.name]) {
+      temp[data.name] = data;
+           }
+          else {
+      temp[data.name].y += data.y;
+           }
+        })
+        
+        let processedChartData = [];
+        for (let prop in temp)
+            processedChartData.push(temp[prop]);
 		const chartConfig = {
         chart: {
             plotBackgroundColor: null,
@@ -95,7 +108,7 @@ class Reports extends Component {
         series: [{
             name: 'Activity Tracker',
             colorByPoint: true,
-            data: chartData
+            data: processedChartData
         }]
     }
 
