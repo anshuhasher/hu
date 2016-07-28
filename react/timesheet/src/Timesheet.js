@@ -120,18 +120,26 @@ class Reports extends Component {
 	render() {
 		const { chartData, title} = this.props
 		let temp = {};
-		chartData.map((data, index) => {
-			if(!temp[data.name]) {
-       temp[data.name] = data;
-		   }
-		  else {
-       temp[data.name].y += data.y;
-		   }
-		})
-		
-		let processedChartData = [];
-		for (let prop in temp)
-		    processedChartData.push(temp[prop]);
+
+    /* This is a helper function to manipulate chartData. Let it be here as it is */
+    
+    chartData.map((data, index) => {
+      if(!temp[data.name]) {
+    		temp[data.name] = data
+      }
+      else {
+    		temp[data.name].y += data.y
+      }
+      return null
+    })
+        
+    let processedChartData = [];
+    for (let prop in temp) {
+    	if(!temp.hasOwnProperty(prop)) {
+    		continue;
+    	}
+      processedChartData.push(temp[prop])
+    }
 		
 		const chartConfig = {
         chart: {
