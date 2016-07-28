@@ -8,7 +8,9 @@ class Timesheet extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			entries: []
+			entries: [],
+			projectChartData: [],
+			activityChartData: []
 		}
 	}
 	
@@ -17,25 +19,38 @@ class Timesheet extends Component {
 	*/
 	handleAddButtonclick = (e) => {
 		e.preventDefault()
+		let projectCode = $('#project-code').val()
+		let activity = $('#activity').val()
+		let hours = parseInt($('#hours').val())
 		this.setState({
 			entries: [
 				...this.state.entries, 
 				{
-					projectCode: $('#project-code').val(),
-					activity: $('#activity').val(),
-					hours: $('#hours').val()
+					projectCode: projectCode,
+					activity: activity,
+					hours: hours
+				}],
+				projectChartData: [
+				...this.state.projectChartData,
+				{
+					name: projectCode,
+					y: hours
+				}],
+				activityChartData: [
+				...this.state.activityChartData,
+				{
+					name: activity,
+					y: hours
 				}]
-		})		
+		})
 	}
   
   render() {
   	/* -Use className instead of class attributes
 			 -React custom components begin with a capital letter like <AddEntryForm>
   	*/
-  	const { entries } = this.state
-  	const projectChartData = [{ name: 'Hiway', y: 5}, {name: 'Idera', y: 6}, {name: 'Next-IT',y: 2 }]
-  	const activityChartData = [{ name: 'Dev', y: 2}, {name: 'Meeting', y: 5}, {name: 'Debug',y: 2 }]
-    return (
+  	const { entries, projectChartData, activityChartData } = this.state
+  	return (
     	<div className="row">
 	      <div className="col-md-12">
 	      	<AddEntryForm onAddButtonClick={this.handleAddButtonclick} />
@@ -132,6 +147,21 @@ class Entries extends Component {
 class Reports extends Component {
 	render() {
 		const { chartData, title} = this.props
+		
+		let temp = {};
+		chartData.map((data, index) => {
+			if(!temp[data.name]) {
+       temp[data.name] = data;
+		   }
+		  else {
+       temp[data.name].y += data.y;
+		   }
+		})
+		
+		let processedChartData = [];
+		for (let prop in temp)
+		    processedChartData.push(temp[prop]);
+		console.log(processedChartData)
 		const chartConfig = {
         chart: {
             plotBackgroundColor: null,
@@ -146,7 +176,7 @@ class Reports extends Component {
         series: [{
             name: title,
             colorByPoint: true,
-            data: chartData
+            data: processedChartData
         }]
     }
 
