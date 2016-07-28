@@ -3,6 +3,8 @@ import './index.css';
 import ReactHighchart from 'react-highcharts'
 
 
+/* This is a container which encapsulates AddEntryForm, Entries and Reports components */
+
 class Timesheet extends Component {
 
 	constructor(props) {
@@ -15,7 +17,9 @@ class Timesheet extends Component {
 	/*	-ES6 way of writing a function 
 			-This function is passed as a prop to the AddEntryForm component
 	*/
-	handleAddButtonclick = () => {console.log("This is called from Timesheet Component")}
+	handleAddButtonclick = () => {
+		console.log("This is called from Timesheet Component")
+	}
   
   render() {
   	/* -Use className instead of class attributes
@@ -82,18 +86,29 @@ class Reports extends Component {
                 y: 2
             }]
     let temp = {};
-        chartData.map((data, index) => {
-            if(!temp[data.name]) {
-      temp[data.name] = data;
-           }
-          else {
-      temp[data.name].y += data.y;
-           }
-        })
+
+    /* This is a helper function to manipulate chartData. Let it be here as it is */
+    
+    chartData.map((data, index) => {
+      if(!temp[data.name]) {
+    		temp[data.name] = data
+      }
+      else {
+    		temp[data.name].y += data.y
+      }
+      return null
+    })
         
-        let processedChartData = [];
-        for (let prop in temp)
-            processedChartData.push(temp[prop]);
+    let processedChartData = [];
+    for (let prop in temp) {
+    	if(!temp.hasOwnProperty(prop)) {
+    		continue;
+    	}
+      processedChartData.push(temp[prop])
+    }
+
+    
+
 		const chartConfig = {
         chart: {
             plotBackgroundColor: null,
