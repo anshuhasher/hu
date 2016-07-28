@@ -21,7 +21,7 @@ class Timesheet extends Component {
   	/* -Use className instead of class attributes
 			 -React custom components begin with a capital letter like <AddEntryForm>
   	*/
-  	const projectChartData = [{ name: 'Hiway', y: 5}, {name: 'Idera', y: 6}, {name: 'Next-IT',y: 2 }]
+  	const projectChartData = [{ name: 'Hiway', y: 5}, {name: 'Idera', y: 6}, {name: 'Idera', y: 6}, {name: 'Next-IT',y: 2 }]
   	const activityChartData = [{ name: 'Dev', y: 2}, {name: 'Meeting', y: 5}, {name: 'Debug',y: 2 }]
     return (
     	<div className="row">
@@ -119,6 +119,20 @@ class Entries extends Component {
 class Reports extends Component {
 	render() {
 		const { chartData, title} = this.props
+		let temp = {};
+		chartData.map((data, index) => {
+			if(!temp[data.name]) {
+       temp[data.name] = data;
+		   }
+		  else {
+       temp[data.name].y += data.y;
+		   }
+		})
+		
+		let processedChartData = [];
+		for (let prop in temp)
+		    processedChartData.push(temp[prop]);
+		
 		const chartConfig = {
         chart: {
             plotBackgroundColor: null,
@@ -133,7 +147,7 @@ class Reports extends Component {
         series: [{
             name: title,
             colorByPoint: true,
-            data: chartData
+            data: processedChartData
         }]
     }
 
