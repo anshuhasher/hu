@@ -161,7 +161,6 @@ class Reports extends Component {
 		let processedChartData = [];
 		for (let prop in temp)
 		    processedChartData.push(temp[prop]);
-		console.log(processedChartData)
 		const chartConfig = {
         chart: {
             plotBackgroundColor: null,
