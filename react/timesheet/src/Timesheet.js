@@ -29,7 +29,7 @@ class Timesheet extends Component {
 	      <div className="col-md-12">
 	      	<Entries sampleProp="This is a sample prop"/>
 	      </div>
-	      <div className="col-md-4 col-md-offset-2">
+	      <div className="col-md-4 col-md-offset-3">
 	      	<Reports />
 	      </div>
       </div>
@@ -47,9 +47,9 @@ class AddEntryForm extends Component {
 	render() {
 		const { onAddButtonClick } = this.props
 		return (
-		<div className="add-entry-form col-md-offset-3">
+		<div className="add-entry-form col-md-offset-4">
 			<h2>Timesheet Form Component</h2>
-			<div className="col-md-2">
+			<div className="col-md-2 col-md-offset-2">
 				<input className="btn" type="button" onClick={onAddButtonClick} value="ADD"/>
 			</div>
 		</div>
@@ -61,9 +61,9 @@ class AddEntryForm extends Component {
 class Entries extends Component {
 	render() {
 		return (
-		<div className="timesheet-table col-md-offset-3">
+		<div className="timesheet-table col-md-offset-4">
 			<h2>Timesheet Entries Component</h2>
-			{this.props.sampleProp}
+			<div className="entries">{this.props.sampleProp}</div>
 		</div>
 			)
 	}
@@ -113,7 +113,7 @@ class Reports extends Component {
     }
 
 		return (
-		<div className="reports">
+		<div className="reports col-md-offset-4">
 			<ReactHighchart config={chartConfig}/>
 		</div>
 			)
