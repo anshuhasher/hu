@@ -3,6 +3,11 @@
 #Project Setup
 
 ```
+cd react/timesheet
+```
+
+
+```
 npm install
 ```
 
