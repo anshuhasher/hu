@@ -54,8 +54,8 @@ class AddEntryForm extends Component {
 		return (
 		<div className="add-entry-form col-md-offset-2">
 			<div className="col-md-3">
-				<select className="form-control">
-				<option value="" disabled selected>Select Project Code</option>
+				<select required className="form-control" defaultValue="">
+				<option value="" disabled>Select Project Code</option>
 				{projectCodes.map((code,index) => 
 						<option key={index} value={code}>{code}</option>
 					)
@@ -63,8 +63,8 @@ class AddEntryForm extends Component {
 				</select>		
 			</div>
 			<div className="col-md-3">
-				<select  className="form-control">
-				<option value="" disabled selected>Select Activity</option>
+				<select className="form-control" defaultValue="">
+				<option value="" disabled>Select Activity</option>
 				{activityTypes.map((activity,index) => 
 						<option key={index} value={activity}>{activity}</option>
 					)
@@ -120,18 +120,26 @@ class Reports extends Component {
 	render() {
 		const { chartData, title} = this.props
 		let temp = {};
-		chartData.map((data, index) => {
-			if(!temp[data.name]) {
-       temp[data.name] = data;
-		   }
-		  else {
-       temp[data.name].y += data.y;
-		   }
-		})
-		
-		let processedChartData = [];
-		for (let prop in temp)
-		    processedChartData.push(temp[prop]);
+
+    /* This is a helper function to manipulate chartData. Let it be here as it is */
+    
+    chartData.map((data, index) => {
+      if(!temp[data.name]) {
+    		temp[data.name] = data
+      }
+      else {
+    		temp[data.name].y += data.y
+      }
+      return null
+    })
+        
+    let processedChartData = [];
+    for (let prop in temp) {
+    	if(!temp.hasOwnProperty(prop)) {
+    		continue;
+    	}
+      processedChartData.push(temp[prop])
+    }
 		
 		const chartConfig = {
         chart: {
