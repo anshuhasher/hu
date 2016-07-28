@@ -54,8 +54,8 @@ class AddEntryForm extends Component {
 		return (
 		<div className="add-entry-form col-md-offset-2">
 			<div className="col-md-3">
-				<select className="form-control">
-				<option value="" disabled selected>Select Project Code</option>
+				<select required className="form-control" defaultValue="">
+				<option value="" disabled>Select Project Code</option>
 				{projectCodes.map((code,index) => 
 						<option key={index} value={code}>{code}</option>
 					)
@@ -63,8 +63,8 @@ class AddEntryForm extends Component {
 				</select>		
 			</div>
 			<div className="col-md-3">
-				<select  className="form-control">
-				<option value="" disabled selected>Select Activity</option>
+				<select className="form-control" defaultValue="">
+				<option value="" disabled>Select Activity</option>
 				{activityTypes.map((activity,index) => 
 						<option key={index} value={activity}>{activity}</option>
 					)
