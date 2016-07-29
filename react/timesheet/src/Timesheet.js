@@ -3,7 +3,7 @@ import './index.css';
 import ReactHighchart from 'react-highcharts'
 
 
-class Timesheet extends Component {
+export default class TimesheetContainer extends Component {
 
 	constructor(props) {
 		super(props)
@@ -46,14 +46,24 @@ class Timesheet extends Component {
 	}
   
   render() {
+  	const { entries, projectChartData, activityChartData } = this.state
+  	return (
+    	<Timesheet onAddButtonClick={this.handleAddButtonclick} entries={entries}
+    						 projectChartData={projectChartData} activityChartData={activityChartData} />
+    )
+  }
+}
+
+class Timesheet extends Component {
+  render() {
   	/* -Use className instead of class attributes
 			 -React custom components begin with a capital letter like <AddEntryForm>
   	*/
-  	const { entries, projectChartData, activityChartData } = this.state
-  	return (
-    	<div className="row">
+  	const { onAddButtonClick, entries, projectChartData, activityChartData } = this.props
+    return (
+      <div className="row">
 	      <div className="col-md-12">
-	      	<AddEntryForm onAddButtonClick={this.handleAddButtonclick} />
+	      	<AddEntryForm onAddButtonClick={onAddButtonClick} />
 	      </div>
 	      <div className="col-md-8 col-md-offset-2">
 	      	<Entries entries={entries}/>
@@ -63,7 +73,7 @@ class Timesheet extends Component {
 	      	<Reports chartData={projectChartData} title="By Project"/>
 	      </div>
       </div>
-    )
+    );
   }
 }
 
@@ -195,5 +205,3 @@ class Reports extends Component {
 			)
 	}
 }
-
-export default Timesheet;
