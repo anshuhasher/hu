@@ -13,8 +13,8 @@ export default class TimesheetContainer extends Component {
 			activityChartData: []
 		}
 	}
-	
-	/*	-ES6 way of writing a function 
+
+	/*	-ES6 way of writing a function
 			-This function is passed as a prop to the AddEntryForm component
 	*/
 	handleAddButtonclick = (e) => {
@@ -24,7 +24,7 @@ export default class TimesheetContainer extends Component {
 		let hours = parseInt(document.getElementById('hours').value, 10)
 		this.setState({
 			entries: [
-				...this.state.entries, 
+				...this.state.entries,
 				{
 					projectCode: projectCode,
 					activity: activity,
@@ -44,7 +44,7 @@ export default class TimesheetContainer extends Component {
 				}]
 		})
 	}
-  
+
   render() {
   	const { entries, projectChartData, activityChartData } = this.state
   	return (
@@ -78,7 +78,7 @@ class Timesheet extends Component {
 }
 
 class AddEntryForm extends Component {
-	
+
 	//to validate the datatypes of props
 	static propTypes = {
     onAddButtonClick: React.PropTypes.func,
@@ -94,23 +94,23 @@ class AddEntryForm extends Component {
 			<div className="col-md-3">
 				<select required id="project-code" className="form-control" defaultValue="" >
 				<option value="" disabled >Select Project Code</option>
-				{projectCodes.map((code,index) => 
+				{projectCodes.map((code,index) =>
 						<option key={index} value={code}>{code}</option>
 					)
 				}
-				</select>		
+				</select>
 			</div>
 			<div className="col-md-3">
 				<select required id="activity" className="form-control" defaultValue="">
 					<option value="" disabled>Select Activity</option>
-					{activityTypes.map((activity,index) => 
+					{activityTypes.map((activity,index) =>
 							<option key={index} value={activity}>{activity}</option>
 						)
 					}
-				</select>		
+				</select>
 			</div>
 			<div className="col-md-3">
-				<input required id="hours" className="form-control" type="number" placeholder="Hours"/>
+				<input required id="hours" className="time-field" type="number" placeholder="Hours"/>
 			</div>
 			<div className="col-md-3">
 				<input required className="btn" type="submit" value="ADD"/>
@@ -130,21 +130,21 @@ class Entries extends Component {
 		return (
 		<div className="timesheet-table">
 			<table className="table">
-			  <thead>
+			  <thead className="table-headings">
 			    <tr>
-			      <th>#</th>
-			      <th>Project Code</th>
-			      <th>Activity</th>
-			      <th>Hours</th>
+			      <th className="index-heading">#</th>
+			      <th className="table-headings">Project Code</th>
+			      <th className="table-headings">Activity</th>
+			      <th className="table-headings">Hours</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	{entries.map((entry, index) => 
+			  	{entries.map((entry, index) =>
 			  		<tr key={index}>
-				      <th>{index+1}</th>
-				      <td>{entry.projectCode}</td>
-				      <td>{entry.activity}</td>
-				      <td>{entry.hours}</td>
+				      <th className="index-cell">{index+1}</th>
+				      <td className="data-cell">{entry.projectCode}</td>
+				      <td className="data-cell">{entry.activity}</td>
+				      <td className="data-cell">{entry.hours}</td>
 				    </tr>
 			  	)}
 			  </tbody>
@@ -157,11 +157,11 @@ class Entries extends Component {
 class Reports extends Component {
 	render() {
 		const { chartData, title} = this.props
-		
+
 		let temp = {};
 
     /* This is a helper function to manipulate chartData. Let it be here as it is */
-    
+
     chartData.map((data, index) => {
       if(!temp[data.name]) {
     		temp[data.name] = data
@@ -171,7 +171,7 @@ class Reports extends Component {
       }
       return null
     })
-        
+
     let processedChartData = [];
     for (let prop in temp) {
     	if(!temp.hasOwnProperty(prop)) {

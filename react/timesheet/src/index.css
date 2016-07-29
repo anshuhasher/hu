@@ -6,6 +6,7 @@ body {
 
 .add-entry-form {
 	margin-top: 5%;
+  background-color: red;
 }
 
 .timesheet-table {
@@ -14,4 +15,51 @@ body {
 
 .reports {
 	margin-top: 5%;
+}
+
+.time-field {
+  height: 32px;
+}
+
+.form-control {
+  height: 50%;
+  border-radius: 0px;
+}
+
+.btn {
+  background-color: #00bcd4;
+  color: #ffffff;
+  border-radius: 0px;
+}
+
+.index-heading {
+  background-color: #138F6A;
+  border : 5px solid #ffffff;
+  color: #ffffff;
+  margin-bottom: 10%;
+}
+
+.table-headings {
+  background-color: #32CC99;
+  border :5px solid #ffffff;
+  color: #ffffff;
+  margin-bottom: 10%;
+}
+
+.data-cell {
+  color: #000000;
+  background-color: #e4e4e4;
+  border :5px solid #ffffff;
+  margin-top: 10%;
+  height : 20px;
+  font-size: 13px;
+}
+
+.index-cell {
+  color: #000000;
+  background-color: #e4e4e4;
+  border :5px solid #ffffff;
+  margin-top: 10%;
+  height : 20px;
+  font-size: 13px;
 }
